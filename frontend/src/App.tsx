@@ -5,11 +5,12 @@ import { SlotMachine } from "./components/SlotMachine"
 function App() {
   return (
     <BrowserRouter>
-      <nav>
+      <nav className="">
         <Link to="/">Home</Link>
         <button>Register</button>
         <button>Login</button>
       </nav>
+      <div className="title">Created by Mateusz Binięda</div>
       <Routes>
         <Route path="/" element={<SlotMachine />} />
       </Routes>
