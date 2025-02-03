@@ -1,6 +1,7 @@
 import * as PIXI from "pixi.js"
-import { BlurFilter } from "@pixi/filter-blur"
 import { SYMBOLS } from "./slot.const"
+import { sound } from "@pixi/sound"
+import { BlurFilter } from "@pixi/filter-blur"
 
 export function createSlotMachine(container: HTMLElement): { app: PIXI.Application; spin: () => void } {
   const app = new PIXI.Application({ width: 800, height: 600, backgroundColor: 0x1099bb })
@@ -12,6 +13,10 @@ export function createSlotMachine(container: HTMLElement): { app: PIXI.Applicati
   const reels: { container: PIXI.Container; symbols: PIXI.Text[]; position: number; previousPosition: number; blur: BlurFilter }[] = []
   const reelContainer = new PIXI.Container()
   app.stage.addChild(reelContainer)
+
+  if (!sound.exists("slotDone")) {
+    sound.add("slotDone", "./slot-in-2.mp3")
+  }
 
   for (let i = 0; i < 3; i++) {
     const reel = {
@@ -77,7 +82,7 @@ export function createSlotMachine(container: HTMLElement): { app: PIXI.Applicati
       const target = r.position + 10 + i * 5 + extra
       const time = 2500 + i * 600 + extra * 600
 
-      tweenTo(r, "position", target, time, backout(0.5), null, i === reels.length - 1 ? reelsComplete : null)
+      tweenTo(r, "position", target, time, backout(0.2), null, i === reels.length - 1 ? reelsComplete : null)
     }
   }
 
@@ -112,6 +117,7 @@ export function createSlotMachine(container: HTMLElement): { app: PIXI.Applicati
       t.object[t.property] = lerp(t.propertyBeginValue, t.target, t.easing(phase))
       if (t.change) t.change(t)
       if (phase === 1) {
+        sound.play("slotDone")
         t.object[t.property] = t.target
         if (t.complete) t.complete(t)
         remove.push(t)
