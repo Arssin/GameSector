@@ -38,9 +38,12 @@ export const SlotMachine = () => {
         }}
         style={{
           marginTop: "20px",
-          padding: "10px 20px",
-          fontSize: "16px",
+          padding: "20px 80px",
+          fontSize: "30px",
           cursor: "pointer",
+          background: "green",
+          color: "white",
+          fontWeight: "bold",
         }}
       >
         Spin

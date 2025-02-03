@@ -21,7 +21,8 @@ export function createSlotMachine(container: HTMLElement, video: HTMLVideoElemen
 
   const mask = new PIXI.Graphics()
   mask.beginFill(0xffffff)
-  mask.drawRect(0, 0, REEL_WIDTH * NUMBER_OF_REELS, SYMBOL_SIZE * 3)
+  console.log(REEL_WIDTH * NUMBER_OF_REELS, SYMBOL_SIZE * 3)
+  mask.drawRect(0, 0, REEL_WIDTH * NUMBER_OF_REELS, SYMBOL_SIZE * 3 - 10)
   mask.endFill()
   reelContainer.mask = mask
   reelContainer.addChild(mask)
