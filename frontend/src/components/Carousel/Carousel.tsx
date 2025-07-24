@@ -15,25 +15,17 @@ const images = [
 ];
 
 export function Carousels() {
-  const autoplay = useRef(Autoplay({ delay: 5000 }));
+  const autoplay = useRef(Autoplay({ delay: 8000 }))
 
   const slides = images.map((url) => (
     <Carousel.Slide key={url}>
-      <img src={url} style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '12px' }} />
+      <img src={url} style={{ width: "100%", height: "200px", objectFit: "cover", borderRadius: "12px" }} />
     </Carousel.Slide>
-  ));
+  ))
 
   return (
-    <Carousel
-      classNames={classes}
-      withIndicators
-      height={220}
-      plugins={[autoplay.current]}
-      emblaOptions={{ loop: true, dragFree: true, align: 'start' }}
-      onMouseEnter={autoplay.current.stop}
-      onMouseLeave={() => autoplay.current.play()}
-    >
+    <Carousel classNames={classes} withIndicators height={220} plugins={[autoplay.current]} emblaOptions={{ loop: true, dragFree: true, align: "start" }} onMouseEnter={autoplay.current.stop} onMouseLeave={() => autoplay.current.play()}>
       {slides}
     </Carousel>
-  );
+  )
 }
