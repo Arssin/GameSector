@@ -4,6 +4,21 @@ import { createSlotMachine } from "./slotMachineLogic"
 import className from "./SlotMachine.module.css"
 
 export const SlotMachine = () => {
+  // ...existing code...
+  const [isPortrait, setIsPortrait] = useState(false)
+  useEffect(() => {
+    const checkOrientation = () => {
+      const isMobile = window.innerWidth < 700
+      setIsPortrait(isMobile && window.innerHeight > window.innerWidth)
+    }
+    checkOrientation()
+    window.addEventListener("resize", checkOrientation)
+    window.addEventListener("orientationchange", checkOrientation)
+    return () => {
+      window.removeEventListener("resize", checkOrientation)
+      window.removeEventListener("orientationchange", checkOrientation)
+    }
+  }, [])
   const containerRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const [spinFunction, setSpinFunction] = useState<(() => void) | null>(null)
@@ -11,6 +26,10 @@ export const SlotMachine = () => {
   const [autoSpin, setAutoSpin] = useState(false)
   const [showConfetti, setShowConfetti] = useState(false)
   const [fullscreen, setFullscreen] = useState(false)
+  // kasynowa otoczka: dźwignia animowana
+  const handleLever = () => {
+    if (spinFunction) spinFunction()
+  }
 
   useEffect(() => {
     if (containerRef.current) {
@@ -45,6 +64,19 @@ export const SlotMachine = () => {
       }
     }
   }, [])
+
+  // autospin effect
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null
+    if (autoSpin && spinFunction && !spinning) {
+      interval = setInterval(() => {
+        spinFunction()
+      }, 1800)
+    }
+    return () => {
+      if (interval) clearInterval(interval)
+    }
+  }, [autoSpin, spinFunction, spinning])
 
   const triggerConfetti = () => {
     setShowConfetti(true)
@@ -127,103 +159,43 @@ export const SlotMachine = () => {
   }
 
   return (
-    <div className={className.slotMachineMain}>
-      <div ref={containerRef} className={className.pixiContainer} />
-
-      {/* SVG Lever */}
-      <svg
-        id="lever"
-        onClick={handleLeverPull}
-        width="80"
-        height="160"
-        viewBox="0 0 80 160"
-        style={{
-          position: "absolute",
-          right: "5%",
-          top: "40%",
-          cursor: "pointer",
-          zIndex: 10,
-          transformOrigin: "top center",
-          transition: "transform 0.2s ease-in-out",
-        }}
-      >
-        <rect x="30" y="40" width="20" height="100" rx="10" fill="#444" />
-        <circle cx="40" cy="30" r="20" fill="red" />
-      </svg>
-
-      {/* Spin Button */}
-      {/* <button
-        onClick={handleLeverPull}
-        style={{
-          position: "absolute",
-          bottom: "40px",
-          left: "50%",
-          transform: "translateX(-50%)",
-          padding: "20px 60px",
-          fontSize: "28px",
-          fontWeight: "bold",
-          borderRadius: "12px",
-          background: "linear-gradient(45deg, #28a745, #218838)",
-          color: "#fff",
-          boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
-          animation: "pulse 2s infinite",
-          border: "none",
-          cursor: "pointer",
-        }}
-      >
-        SPIN
-      </button> */}
-
-      {/* Fullscreen toggle */}
-      {/* <button
-        onClick={toggleFullscreen}
-        style={{
-          position: "absolute",
-          top: "20px",
-          right: "20px",
-          padding: "10px 20px",
-          fontSize: "16px",
-          background: "#333",
-          color: "#fff",
-          border: "2px solid gold",
-          borderRadius: "6px",
-          cursor: "pointer",
-        }}
-      >
-        {fullscreen ? "Exit Fullscreen" : "Fullscreen"}
-      </button>
-      <label className="autospin">
-        <input type="checkbox" checked={autoSpin} onChange={(e) => setAutoSpin(e.target.checked)} /> Auto Spin
-      </label> */}
-
-      {/* Confetti */}
-      {/* {showConfetti && (
-        <canvas
-          id="confetti"
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "100vh",
-            zIndex: 999,
-            pointerEvents: "none",
-          }}
-        />
-      )} */}
-
-      {/* Styles */}
-      {/* <style>{`
-        @keyframes pulse {
-          0% { transform: translateX(-50%) scale(1); }
-          50% { transform: translateX(-50%) scale(1.1); }
-          100% { transform: translateX(-50%) scale(1); }
-        }
-
-        #lever.pulling {
-          transform: rotate(30deg);
-        }
-      `}</style> */}
+    <div className={className.screenWrap}>
+      {isPortrait && (
+        <div className={className.rotateInfo}>
+          Aby zagrać, obróć telefon poziomo.
+          <br />
+          <span role="img" aria-label="rotate">
+            🔄
+          </span>
+        </div>
+      )}
+      {!isPortrait && (
+        <>
+          <div>Player Panel</div>
+          <div className={className.gameMain}>
+            <div ref={containerRef} className={className.pixiContainer} />
+            {/* Dźwignia po prawej */}
+          </div>
+          <div>
+            LowerPanel
+            <div className={className.leverContainer}>
+              <button className={spinning ? `${className.lever} ${className.disabled}` : className.lever} onClick={handleLeverPull} disabled={spinning} aria-label="Spin lever">
+                <svg width="80" height="160" viewBox="0 0 80 160">
+                  <rect x="35" y="30" width="10" height="100" rx="5" fill="#bfa76f" stroke="#fff200" strokeWidth="2" />
+                  <circle className="lever-knob" cx="40" cy="30" r="18" fill="#fff200" stroke="#bfa76f" strokeWidth="3" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          {/* Toggle autospin na dole */}
+          <div className={className.autospinToggleWrap}>
+            <label className={className.autospinLabel}>
+              <input type="checkbox" checked={autoSpin} onChange={(e) => setAutoSpin(e.target.checked)} className={className.autospinCheckbox} />
+              <span className={className.autospinText}>Autospin</span>
+            </label>
+          </div>
+        </>
+      )}
     </div>
   )
 }

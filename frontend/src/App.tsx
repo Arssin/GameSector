@@ -1,6 +1,7 @@
 import { useState } from "react"
-import { BrowserRouter } from "react-router-dom"
-import { SlotMachine } from "./components/SlotMachine/SlotMachine"
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import Home from "./pages/Home"
+import Games from "./pages/Games"
 import { createTheme, MantineColorsTuple, AppShell, Group, Burger, Title, MantineProvider, ColorSchemeScript, Container } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
 import { Footer } from "./components/Footer/Footer"
@@ -68,7 +69,11 @@ function App() {
 
             <AppShell.Main>
               <Container size="md" className="mainContainer">
-                <SlotMachine />
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/games" element={<Games />} />
+                  <Route path="*" element={<Navigate to="/" replace />} />
+                </Routes>
                 <Footer />
               </Container>
             </AppShell.Main>
