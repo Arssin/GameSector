@@ -10,7 +10,7 @@ import {
   createStyles,
   rem,
 } from '@mantine/core';
-import { NavbarSearch } from './NavbarSearch';
+import { NavbarSearch } from "./Navbar/Navbar"
 import { SlotMachine } from './SlotMachine';
 
 const useStyles = createStyles((theme) => ({
