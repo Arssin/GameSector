@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { TextInput, Button, Group, Text, Stack, ThemeIcon, UnstyledButton, useMantineColorScheme, Modal, Paper } from "@mantine/core"
+import { TextInput, Button, Group, Text, Stack, ThemeIcon, UnstyledButton, useMantineColorScheme, Modal } from "@mantine/core"
+import { useNavigate } from "react-router-dom"
 import { IconHome2, IconDeviceGamepad2, IconTrophy, IconUsers, IconSettings, IconLogin, IconUserPlus, IconSun, IconMoonStars } from "@tabler/icons-react"
-import classes from './Navbar.module.css';
+import classes from "./Navbar.module.css"
 import { AuthenticationForm } from "../AuthenticationForm/AuthenticationForm"
 
 const mainLinks = [
@@ -15,11 +16,12 @@ const mainLinks = [
 interface MainLinkProps {
   icon: React.FC<any>
   label: string
+  onClick: () => void
 }
 
-function MainLink({ icon: Icon, label }: MainLinkProps) {
+function MainLink({ icon: Icon, label, onClick }: MainLinkProps) {
   return (
-    <UnstyledButton className={classes.mainLink}>
+    <UnstyledButton className={classes.mainLink} onClick={onClick}>
       <Group>
         <ThemeIcon variant="light">
           <Icon size="1.1rem" />
@@ -35,8 +37,20 @@ export function Navbar() {
   const [registerModalOpened, setRegisterModalOpened] = useState(false)
   const { colorScheme, toggleColorScheme } = useMantineColorScheme()
   const dark = colorScheme === "dark"
+  const navigate = useNavigate()
 
-  const links = mainLinks.map((link) => <MainLink {...link} key={link.label} />)
+  const getPath = (label: string) => {
+    switch (label) {
+      case "Home":
+        return "/"
+      case "Games":
+        return "/games"
+      default:
+        return "/"
+    }
+  }
+
+  const links = mainLinks.map((link) => <MainLink {...link} key={link.label} onClick={() => navigate(getPath(link.label))} />)
 
   return (
     <>
@@ -101,14 +115,7 @@ export function Navbar() {
         </div>
 
         {/* Custom animated toggle button at the bottom */}
-        <Paper
-          p="md"
-          style={{
-            borderTop: "1px solid var(--mantine-color-gray-3)",
-            transition: "all 0.3s ease",
-            backgroundColor: dark ? "var(--mantine-color-dark-6)" : "var(--mantine-color-gray-0)",
-          }}
-        >
+        <div className={classes.toggleContainer}>
           <div
             style={{
               display: "flex",
@@ -177,7 +184,7 @@ export function Navbar() {
               <IconMoonStars size={20} stroke={2} color={dark ? "#ffd43b" : "#888"} />
             </div>
           </div>
-        </Paper>
+        </div>
       </div>
     </>
   )
