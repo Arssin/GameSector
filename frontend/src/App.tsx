@@ -2,7 +2,8 @@ import { useState } from "react"
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import Home from "./pages/Home"
 import Games from "./pages/Games"
-import { createTheme, MantineColorsTuple, AppShell, Group, Burger, Title, MantineProvider, ColorSchemeScript, Container } from "@mantine/core"
+import { createTheme, MantineColorsTuple, AppShell, Group, Burger, MantineProvider, ColorSchemeScript, Container } from "@mantine/core"
+import logo from "./assets/logo.png"
 import { useDisclosure } from "@mantine/hooks"
 import { Footer } from "./components/Footer/Footer"
 import "@mantine/core/styles.css"
@@ -58,7 +59,7 @@ function App() {
               <Group h="100%" px="md" justify="space-between">
                 <Group pl={"1rem"}>
                   <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-                  <Title order={3}>Game Sector</Title>
+                  <img src={logo} alt="Game Sector Logo" style={{ height: 24, objectFit: "contain" }} />
                 </Group>
               </Group>
             </AppShell.Header>
@@ -74,8 +75,8 @@ function App() {
                   <Route path="/games" element={<Games />} />
                   <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
-                <Footer />
               </Container>
+              <Footer />
             </AppShell.Main>
           </AppShell>
         </BrowserRouter>
