@@ -1,9 +1,20 @@
 .title {
-  font-size: 34px;
-  font-weight: 500;
+  font-size: 38px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #ff9800 0%, #ffb74d 100%);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-align: center;
+  padding: 1.2rem 0 1.2rem 0;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px 0 rgba(255, 152, 0, 0.12);
+  letter-spacing: 1px;
+  transition: box-shadow 0.3s, background 0.3s;
 
-  @media (max-width: $mantine-breakpoint-sm) {
+  @media (max-width: 600px) {
     font-size: 24px;
+    padding: 0.7rem 0 0.7rem 0;
   }
 }
 

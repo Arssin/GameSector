@@ -13,27 +13,24 @@ import classes from './FeaturesCards.module.css';
 
 const mockdata = [
   {
-    title: 'Extreme performance',
-    description:
-      'This dust is actually a powerful poison that will even make a pro wrestler sick, Regice cloaks itself with frigid air of -328 degrees Fahrenheit',
+    title: "Personal project, pure fun!",
+    description: "Game Sector is my own casino playground – no stress, no risk, just pure fun and code! Built after hours, driven by passion for games.",
     icon: IconGauge,
   },
   {
-    title: 'Privacy focused',
-    description:
-      'People say it can run at the same speed as lightning striking, Its icy body is so cold, it will not melt even if it is immersed in magma',
+    title: "Play, test, enjoy!",
+    description: "Slots, machines, experiments – all in one place. You won’t win millions here, but you’ll see how real casino mechanics work!",
     icon: IconUser,
   },
   {
-    title: 'No third parties',
-    description:
-      'They’re popular, but they’re rare. Trainers who show them off recklessly may be targeted by thieves',
+    title: "No ads, no tricks",
+    description: "No hidden fees, no annoying popups. Just a demo showing how to build a casino in React!",
     icon: IconCookie,
   },
-];
+]
 
 export function FeaturesCards() {
-  const theme = useMantineTheme();
+  const theme = useMantineTheme()
   const features = mockdata.map((feature) => (
     <Card key={feature.title} shadow="md" radius="md" className={classes.card} padding="xl">
       <feature.icon size={50} stroke={1.5} color={theme.colors.blue[6]} />
@@ -44,28 +41,27 @@ export function FeaturesCards() {
         {feature.description}
       </Text>
     </Card>
-  ));
+  ))
 
   return (
     <Container size="lg" py="xl">
+      <Title order={2} className={classes.title} ta="center" mt="sm">
+        Play and enjoy – all in one place!
+      </Title>
+
       <Group justify="center">
-        <Badge variant="filled" size="lg">
-          Best company ever
+        <Badge variant="filled" size="lg" color="orange">
+          Private casino project - just for fun!
         </Badge>
       </Group>
 
-      <Title order={2} className={classes.title} ta="center" mt="sm">
-        Integrate effortlessly with any technology stack
-      </Title>
-
       <Text c="dimmed" className={classes.description} ta="center" mt="md">
-        Every once in a while, you’ll see a Golbat that’s missing some fangs. This happens when
-        hunger drives it to try biting a Steel-type Pokémon.
+        This is a personal demo showing how casino games work under the hood. No ads, no tricks, just pure entertainment and a bit of code magic. Try your luck and see how slots are made!
       </Text>
 
       <SimpleGrid cols={{ base: 1, md: 3 }} spacing="xl" mt={50}>
         {features}
       </SimpleGrid>
     </Container>
-  );
+  )
 }
