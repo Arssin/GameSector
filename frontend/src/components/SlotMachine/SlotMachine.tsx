@@ -127,16 +127,11 @@ export const SlotMachine = () => {
   }
 
   return (
-    <div
-      className={className.slotMachineMain}
-    >
-      <div
-        ref={containerRef}
-        className={className.pixiContainer}
-      />
+    <div className={className.slotMachineMain}>
+      <div ref={containerRef} className={className.pixiContainer} />
 
       {/* SVG Lever */}
-      {/* <svg
+      <svg
         id="lever"
         onClick={handleLeverPull}
         width="80"
@@ -154,7 +149,7 @@ export const SlotMachine = () => {
       >
         <rect x="30" y="40" width="20" height="100" rx="10" fill="#444" />
         <circle cx="40" cy="30" r="20" fill="red" />
-      </svg> */}
+      </svg>
 
       {/* Spin Button */}
       {/* <button

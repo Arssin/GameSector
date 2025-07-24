@@ -1,10 +1,9 @@
 import { useState } from "react"
 import { BrowserRouter } from "react-router-dom"
 import { SlotMachine } from "./components/SlotMachine/SlotMachine"
-import { createTheme, MantineColorsTuple, AppShell, Group, Burger, Title, ActionIcon, MantineProvider, ColorSchemeScript, Container } from "@mantine/core"
+import { createTheme, MantineColorsTuple, AppShell, Group, Burger, Title, MantineProvider, ColorSchemeScript, Container } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
-import { IconSun, IconMoonStars } from "@tabler/icons-react"
-import { Footer } from "./components/Footer"
+import { Footer } from "./components/Footer/Footer"
 import "@mantine/core/styles.css"
 import "./App.css"
 import { Navbar } from "./components/Navbar/Navbar"
@@ -56,13 +55,10 @@ function App() {
           >
             <AppShell.Header>
               <Group h="100%" px="md" justify="space-between">
-                <Group>
+                <Group pl={"1rem"}>
                   <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
                   <Title order={3}>Game Sector</Title>
                 </Group>
-                <ActionIcon variant="outline" color={colorScheme === "dark" ? "yellow" : "blue"} onClick={toggleColorScheme} title="Toggle color scheme">
-                  {colorScheme === "dark" ? <IconSun size={18} /> : <IconMoonStars size={18} />}
-                </ActionIcon>
               </Group>
             </AppShell.Header>
 
