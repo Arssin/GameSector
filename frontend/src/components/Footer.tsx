@@ -5,6 +5,7 @@ export const Footer = () => {
   return (
     <footer>
       <Container
+        size="md"
         style={{
           display: "flex",
           justifyContent: "space-between",

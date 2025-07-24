@@ -1,12 +1,12 @@
-import "./App.css"
 import { useState } from "react"
 import { BrowserRouter } from "react-router-dom"
 import { SlotMachine } from "./components/SlotMachine/SlotMachine"
-import { createTheme, MantineColorsTuple, AppShell, Group, Burger, Title, ActionIcon, MantineProvider, ColorSchemeScript } from "@mantine/core"
+import { createTheme, MantineColorsTuple, AppShell, Group, Burger, Title, ActionIcon, MantineProvider, ColorSchemeScript, Container } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
 import { IconSun, IconMoonStars } from "@tabler/icons-react"
 import { Footer } from "./components/Footer"
 import "@mantine/core/styles.css"
+import "./App.css"
 import { Navbar } from "./components/Navbar/Navbar"
 
 const myColor: MantineColorsTuple = ["#fcf5ee", "#f5e9dc", "#edd1b2", "#e5b884", "#dea25d", "#da9545", "#d88e38", "#c07a2a", "#ab6c23", "#42290b"]
@@ -71,11 +71,10 @@ function App() {
             </AppShell.Navbar>
 
             <AppShell.Main>
-              <SlotMachine />
-
-              <div style={{ width: "100%" }}>
+              <Container size="md" className="mainContainer">
+                <SlotMachine />
                 <Footer />
-              </div>
+              </Container>
             </AppShell.Main>
           </AppShell>
         </BrowserRouter>
