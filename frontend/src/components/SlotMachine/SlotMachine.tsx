@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
-import videoSrc from "../assets/background.mp4"
+import videoSrc from "../../assets/background.mp4"
 import { createSlotMachine } from "./slotMachineLogic"
+import className from "./SlotMachine.module.css"
 
 export const SlotMachine = () => {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -127,29 +128,15 @@ export const SlotMachine = () => {
 
   return (
     <div
-      style={{
-        position: "relative",
-        width: "100vw",
-        height: "100vh",
-        background: "#111",
-        overflow: "hidden",
-      }}
+      className={className.slotMachineMain}
     >
       <div
         ref={containerRef}
-        style={{
-          border: "10px solid gold",
-          borderRadius: "20px",
-          boxShadow: "0 0 30px gold",
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-        }}
+        className={className.pixiContainer}
       />
 
       {/* SVG Lever */}
-      <svg
+      {/* <svg
         id="lever"
         onClick={handleLeverPull}
         width="80"
@@ -167,10 +154,10 @@ export const SlotMachine = () => {
       >
         <rect x="30" y="40" width="20" height="100" rx="10" fill="#444" />
         <circle cx="40" cy="30" r="20" fill="red" />
-      </svg>
+      </svg> */}
 
       {/* Spin Button */}
-      <button
+      {/* <button
         onClick={handleLeverPull}
         style={{
           position: "absolute",
@@ -190,10 +177,10 @@ export const SlotMachine = () => {
         }}
       >
         SPIN
-      </button>
+      </button> */}
 
       {/* Fullscreen toggle */}
-      <button
+      {/* <button
         onClick={toggleFullscreen}
         style={{
           position: "absolute",
@@ -212,10 +199,10 @@ export const SlotMachine = () => {
       </button>
       <label className="autospin">
         <input type="checkbox" checked={autoSpin} onChange={(e) => setAutoSpin(e.target.checked)} /> Auto Spin
-      </label>
+      </label> */}
 
       {/* Confetti */}
-      {showConfetti && (
+      {/* {showConfetti && (
         <canvas
           id="confetti"
           style={{
@@ -228,10 +215,10 @@ export const SlotMachine = () => {
             pointerEvents: "none",
           }}
         />
-      )}
+      )} */}
 
       {/* Styles */}
-      <style>{`
+      {/* <style>{`
         @keyframes pulse {
           0% { transform: translateX(-50%) scale(1); }
           50% { transform: translateX(-50%) scale(1.1); }
@@ -241,7 +228,7 @@ export const SlotMachine = () => {
         #lever.pulling {
           transform: rotate(30deg);
         }
-      `}</style>
+      `}</style> */}
     </div>
   )
 }

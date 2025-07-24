@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { TextInput, Button, Group, Text, Stack, ThemeIcon, UnstyledButton, useMantineColorScheme, Modal, Paper } from "@mantine/core"
 import { IconHome2, IconDeviceGamepad2, IconTrophy, IconUsers, IconSettings, IconLogin, IconUserPlus, IconSun, IconMoonStars } from "@tabler/icons-react"
 import classes from './Navbar.module.css';
+import { AuthenticationForm } from "../AuthenticationForm/AuthenticationForm"
 
 const mainLinks = [
   { icon: IconHome2, label: "Home" },
@@ -18,9 +19,7 @@ interface MainLinkProps {
 
 function MainLink({ icon: Icon, label }: MainLinkProps) {
   return (
-    <UnstyledButton
-      className={classes.mainLink}
-    >
+    <UnstyledButton className={classes.mainLink}>
       <Group>
         <ThemeIcon variant="light">
           <Icon size="1.1rem" />
@@ -45,17 +44,22 @@ export function Navbar() {
         opened={loginModalOpened}
         onClose={() => setLoginModalOpened(false)}
         title="Welcome back!"
-        centered
-        overlayProps={{
-          className: classes.modalOverlay,
-          color: dark ? "rgba(0, 0, 0, 0.75)" : "rgba(255, 255, 255, 0.75)",
-        }}
+        // centered
+        // size="sm"
+        // overlayProps={{
+        //   className: classes.modalOverlay,
+        // }}
+        // classNames={{
+        //   content: classes.modal,
+        //   title: classes.modalTitle,
+        // }}
       >
-        <Stack className={classes.modalForm}>
+        <AuthenticationForm />
+        {/* <Stack className={classes.modalForm}>
           <TextInput placeholder="Email" label="Email address" required />
           <TextInput placeholder="Password" label="Password" type="password" required />
           <Button fullWidth>Sign in</Button>
-        </Stack>
+        </Stack> */}
       </Modal>
 
       <Modal
@@ -63,9 +67,13 @@ export function Navbar() {
         onClose={() => setRegisterModalOpened(false)}
         title="Create an account"
         centered
+        size="sm"
         overlayProps={{
           className: classes.modalOverlay,
-          color: dark ? "rgba(0, 0, 0, 0.75)" : "rgba(255, 255, 255, 0.75)",
+        }}
+        classNames={{
+          content: classes.modal,
+          title: classes.modalTitle,
         }}
       >
         <Stack className={classes.modalForm}>

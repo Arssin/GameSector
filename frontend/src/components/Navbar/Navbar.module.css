@@ -49,6 +49,21 @@
   gap: 1rem;
 }
 
+.modal {
+  background-color: var(--mantine-color-body);
+  border-radius: var(--mantine-radius-md);
+  padding: 1.5rem;
+  position: relative;
+  min-width: 320px;
+}
+
+.modalTitle {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
 .modalOverlay {
   backdrop-filter: blur(3px);
+  background-color: rgba(0, 0, 0, 0.55);
 }

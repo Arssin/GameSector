@@ -1,7 +1,7 @@
 import "./App.css"
 import { useState } from "react"
 import { BrowserRouter } from "react-router-dom"
-import { SlotMachine } from "./components/SlotMachine"
+import { SlotMachine } from "./components/SlotMachine/SlotMachine"
 import { createTheme, MantineColorsTuple, AppShell, Group, Burger, Title, ActionIcon, MantineProvider, ColorSchemeScript } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
 import { IconSun, IconMoonStars } from "@tabler/icons-react"
@@ -71,36 +71,10 @@ function App() {
             </AppShell.Navbar>
 
             <AppShell.Main>
-              <div
-                style={{
-                  maxWidth: "100%",
-                  height: "calc(100vh - 60px)",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  padding: "1rem",
-                  background: "var(--mantine-color-body)",
-                }}
-              >
-                <div
-                  style={{
-                    maxWidth: "1200px",
-                    width: "100%",
-                    flex: 1,
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    borderRadius: "var(--mantine-radius-md)",
-                    background: "var(--mantine-color-default)",
-                    padding: "2rem",
-                  }}
-                >
-                  <SlotMachine />
-                </div>
-                <div style={{ width: "100%" }}>
-                  <Footer />
-                </div>
+              <SlotMachine />
+
+              <div style={{ width: "100%" }}>
+                <Footer />
               </div>
             </AppShell.Main>
           </AppShell>
